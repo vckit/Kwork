@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище dbLocalModelContainer" CdmEntityContainer="dbLocalEntities">
+    <EntitySetMapping Name="Peripherals">
+      <EntityTypeMapping TypeName="dbLocalModel.Peripherals">
+        <MappingFragment StoreEntitySet="Peripherals">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RackNumber" ColumnName="RackNumber" />
+          <ScalarProperty Name="ShelfNumber" ColumnName="ShelfNumber" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Position">
+      <EntityTypeMapping TypeName="dbLocalModel.Position">
+        <MappingFragment StoreEntitySet="Position">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rule">
+      <EntityTypeMapping TypeName="dbLocalModel.Rule">
+        <MappingFragment StoreEntitySet="Rule">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SignIn">
+      <EntityTypeMapping TypeName="dbLocalModel.SignIn">
+        <MappingFragment StoreEntitySet="SignIn">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IDRole" ColumnName="IDRole" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SpareParts">
+      <EntityTypeMapping TypeName="dbLocalModel.SpareParts">
+        <MappingFragment StoreEntitySet="SpareParts">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RackNumber" ColumnName="RackNumber" />
+          <ScalarProperty Name="ShelfNumber" ColumnName="ShelfNumber" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IDTypeObject" ColumnName="IDTypeObject" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="dbLocalModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeObject">
+      <EntityTypeMapping TypeName="dbLocalModel.TypeObject">
+        <MappingFragment StoreEntitySet="TypeObject">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="dbLocalModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="IDPosition" ColumnName="IDPosition" />
+          <ScalarProperty Name="IDSignIn" ColumnName="IDSignIn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

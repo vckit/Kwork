@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="74de772c3d674cfdae6a0385b20a49a4" Name="Diagram1">
+        <EntityTypeShape EntityType="dbLocalModel.Peripherals" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbLocalModel.Position" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbLocalModel.Rule" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbLocalModel.SignIn" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbLocalModel.SpareParts" Width="1.5" PointX="8" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbLocalModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbLocalModel.TypeObject" Width="1.5" PointX="5.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbLocalModel.User" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="dbLocalModel.FK_User_Position" ManuallyRouted="false" />
+        <AssociationConnector Association="dbLocalModel.FK_SignIn_Rule" ManuallyRouted="false" />
+        <AssociationConnector Association="dbLocalModel.FK_User_SignIn" ManuallyRouted="false" />
+        <AssociationConnector Association="dbLocalModel.FK_SpareParts_TypeObject" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище dbLocalModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Peripherals">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RackNumber" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="ShelfNumber" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="Count" Type="int" Nullable="false" />
+    <Property Name="DateAdded" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Position">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rule">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SignIn">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IDRole" Type="char" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SpareParts">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RackNumber" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="ShelfNumber" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="IDTypeObject" Type="int" Nullable="false" />
+    <Property Name="Count" Type="int" Nullable="false" />
+    <Property Name="DateAdded" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TypeObject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IDPosition" Type="int" Nullable="false" />
+    <Property Name="IDSignIn" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_SignIn_Rule">
+    <End Role="Rule" Type="Self.Rule" Multiplicity="1" />
+    <End Role="SignIn" Type="Self.SignIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rule">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SignIn">
+        <PropertyRef Name="IDRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SpareParts_TypeObject">
+    <End Role="TypeObject" Type="Self.TypeObject" Multiplicity="1" />
+    <End Role="SpareParts" Type="Self.SpareParts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeObject">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SpareParts">
+        <PropertyRef Name="IDTypeObject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Position">
+    <End Role="Position" Type="Self.Position" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="IDPosition" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_SignIn">
+    <End Role="SignIn" Type="Self.SignIn" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SignIn">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="IDSignIn" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище dbLocalModelContainer">
+    <EntitySet Name="Peripherals" EntityType="Self.Peripherals" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rule" EntityType="Self.Rule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SignIn" EntityType="Self.SignIn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SpareParts" EntityType="Self.SpareParts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeObject" EntityType="Self.TypeObject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_SignIn_Rule" Association="Self.FK_SignIn_Rule">
+      <End Role="Rule" EntitySet="Rule" />
+      <End Role="SignIn" EntitySet="SignIn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SpareParts_TypeObject" Association="Self.FK_SpareParts_TypeObject">
+      <End Role="TypeObject" EntitySet="TypeObject" />
+      <End Role="SpareParts" EntitySet="SpareParts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Position" Association="Self.FK_User_Position">
+      <End Role="Position" EntitySet="Position" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_SignIn" Association="Self.FK_User_SignIn">
+      <End Role="SignIn" EntitySet="SignIn" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

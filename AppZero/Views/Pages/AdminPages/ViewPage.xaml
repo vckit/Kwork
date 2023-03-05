@@ -1,0 +1,309 @@
+﻿<Page x:Class="AppZero.Views.Pages.AdminPages.ViewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AppZero.Views.Pages.AdminPages"
+      mc:Ignorable="d" FontSize="14"
+      Loaded="Page_Loaded"
+      d:DesignHeight="500" d:DesignWidth="830"
+      Title="Форма администратора">
+
+    <Grid>
+        <TabControl>
+            <!--Регистрация сотрудников-->
+            <TabItem>
+                <TabItem.Header>
+                    <Label Height="40"
+                           Width="190"
+                           FontSize="15"
+                           Content="Регистрация сотрудника"
+                           VerticalContentAlignment="Center"/>
+
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel Width="200"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <TextBlock Text="Имя:"/>
+                        <TextBox Text="{Binding User.FirstName}"
+                                 Name="txbFirstName"/>
+                        <TextBlock Text="Фамилия:"/>
+                        <TextBox Text="{Binding User.LastName}"
+                                 Name="txbLastName"/>
+                        <TextBlock Text="Отчество:"/>
+                        <TextBox Text="{Binding User.MiddleName}"
+                                 Name="txbMiddleName"/>
+                        <TextBlock Text="Должность:"/>
+                        <ComboBox ItemsSource="{Binding Positions}"
+                                  Name="cmbPosition"
+                                  DisplayMemberPath="Title"
+                                  SelectedItem="{Binding User.Position}"></ComboBox>
+                        <TextBlock Text="Имя пользователя:"
+                                   Name="txbUsername"/>
+                        <TextBox Text="{Binding SignIn.Username}"/>
+                        <TextBlock Text="Пароль:"/>
+                        <TextBox Text="{Binding SignIn.Password}"
+                                 Name="txbPassword"/>
+                        <TextBlock Text="Роль:"/>
+                        <ComboBox Name="cmbRule" ItemsSource="{Binding Rules}"
+                                  DisplayMemberPath="Title"
+                                  SelectedItem="{Binding User.Rule}"></ComboBox>
+                        <Button Content="Сохранить данные"
+                                Margin="0,10,0,0"
+                                Click="btnSave_Click"
+                                Name="btnSave"/>
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+            <!--База сотрудников-->
+            <TabItem>
+                <TabItem.Header>
+                    <Label Height="40"
+                           Width="190"
+                           FontSize="15"
+                           Content="База сотрудников"
+                           VerticalContentAlignment="Center"/>
+
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="Поиск: "/>
+                            <TextBox Name="txbSearchEmp"
+                                     TextChanged="txbSearchEmp_TextChanged"
+                                     Width="250"/>
+                        </StackPanel>
+
+                        <Grid Grid.Row="1">
+                            <DataGrid MouseDoubleClick="ListDataEmp_MouseDoubleClick" IsReadOnly="True" Name="ListDataEmp" AutoGenerateColumns="False" ColumnWidth="*">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                                    <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"/>
+                                    <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"/>
+                                    <DataGridTextColumn Header="Отчество" Binding="{Binding MiddleName}"/>
+                                    <DataGridTextColumn Header="Должность" Binding="{Binding Position.Title}"/>
+                                    <DataGridTemplateColumn Header="Действие">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Content="Удалить" Name="btnDeleteEMP" Click="btnDeleteEMP_Click"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <!--База запчастей и устройств-->
+            <TabItem>
+                <TabItem.Header>
+                    <Label Height="40"
+                           Width="190"
+                           FontSize="15"
+                           Content="Запчасти и устройства"
+                           VerticalContentAlignment="Center"/>
+
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            
+                            <Label Content="Поиск: "/>
+                            <TextBox Name="txbSearchDevice"
+                                    TextChanged="txbSearchDevice_TextChanged"
+                                     Width="250"/>
+
+                            <StackPanel Margin="40,0,0,0" VerticalAlignment="Center"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Right">
+                                <Label VerticalContentAlignment="Center" 
+                                       Content="Выберите дату: "/>
+                                <DatePicker Name="sortDate"
+                                            SelectedDateChanged="sortDate_SelectedDateChanged"
+                                            Width="200"/>
+                                <Button Content="Обновить"
+                                        Margin="10,0,0,0"
+                                        Name="btnUpdate"
+                                        Click="btnUpdate_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <DataGrid IsReadOnly="False" Name="ListDataSpareParts" AutoGenerateColumns="False" ColumnWidth="*">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Номер стеллажа" Binding="{Binding RackNumber}"/>
+                                    <DataGridTextColumn Header="Номер полки" Binding="{Binding ShelfNumber}"/>
+                                    <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+                                    <DataGridTextColumn Header="Тип" Binding="{Binding TypeObject.Title}"/>
+                                    <DataGridTextColumn Header="Количество" Binding="{Binding Count}"/>
+                                    <DataGridTextColumn Header="Дата добавления" Binding="{Binding DateAdded}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <!--Панель кнопок-->
+                            <StackPanel Grid.Row="1"
+                                        Orientation="Horizontal"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
+                                <Button Content="Добавить"
+                                        Width="200"
+                                        Name="btnAdd"
+                                        Click="btnAdd_Click"/>
+                                <Button Content="Редактировать"
+                                        Width="200"
+                                        Name="btnEdit"
+                                        Margin="5,0,5,0"
+                                        Click="btnEdit_Click"/>
+                                <Button Content="Удалить"
+                                        Width="200"
+                                        Name="btnRemove"
+                                        Click="btnRemove_Click"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Margin="10,0,0,0">
+                                <Label Content="Выберите период: "/>
+                                <DatePicker Name="dtpStartDate"
+                                            Width="200"
+                                            SelectedDateChanged="dtpStartDate_SelectedDateChanged"/>
+                                
+                                <DatePicker Name="dtpEndDate"
+                                            Margin="10,0,0,0"
+                                            Width="200"
+                                            SelectedDateChanged="dtpEndDate_SelectedDateChanged"/>
+                                <Button Content="Вывести"
+                                        Margin="10,0,0,0"
+                                        Width="250"
+                                        Name="btnPrint"
+                                        Click="btnPrint_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <!--База учёта периферии-->
+            <TabItem>
+                <TabItem.Header>
+                    <Label Height="40"
+                           Width="190"
+                           FontSize="15"
+                           Content="Учёт периферии"
+                           VerticalContentAlignment="Center"/>
+
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+
+                            <Label Content="Поиск: "/>
+                            <TextBox Name="txbSearchPeripher"
+                                     TextChanged="txbSearchPeripher_TextChanged"
+                                     Width="250"/>
+
+                            <StackPanel Margin="40,0,0,0" VerticalAlignment="Center"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Right">
+                                <Label VerticalContentAlignment="Center" 
+                                       Content="Выберите дату: "/>
+                                <DatePicker Name="sortDatePeripher"
+                                            SelectedDateChanged="sortDatePeripher_SelectedDateChanged"
+                                            Width="200"/>
+
+                                <Button Content="Обновить"
+                                        Margin="10,0,0,0"
+                                        Name="btnUpdatePeripher"
+                                        Click="btnUpdate_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <DataGrid IsReadOnly="False" Name="listDataPeripher" AutoGenerateColumns="False" ColumnWidth="*">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Номер стеллажа" Binding="{Binding RackNumber}"/>
+                                    <DataGridTextColumn Header="Номер полки" Binding="{Binding ShelfNumber}"/>
+                                    <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+                                    <DataGridTextColumn Header="Количество" Binding="{Binding Count}"/>
+                                    <DataGridTextColumn Header="Дата" Binding="{Binding DateAdded}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <!--Панель кнопок-->
+                            <StackPanel Grid.Row="1"
+                                        Orientation="Horizontal"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
+                                <Button Content="Добавить"
+                                        Width="200"
+                                        Name="btnAddPeripherals"
+                                        Click="btnAddPeripherals_Click"/>
+                                <Button Content="Редактировать"
+                                        Width="200"
+                                        Name="btnEditPeripherals"
+                                        Margin="5,0,5,0"
+                                        Click="btnEditPeripherals_Click"/>
+                                <Button Content="Удалить"
+                                        Width="200"
+                                        Name="btnRemovePeripherals"
+                                        Click="btnRemovePeripherals_Click"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Margin="10,0,0,0">
+                                <Label Content="Выберите период: "/>
+                                <DatePicker Name="dtpStartDatePeripher"
+                                            Width="200"/>
+
+                                <DatePicker Name="dtpEndDatePeripher"
+                                            Margin="10,0,0,0"
+                                            Width="200"/>
+                                <Button Content="Вывести"
+                                        Margin="10,0,0,0"
+                                        Width="250"
+                                        Name="btnPrintPeripher"
+                                        Click="btnPrintPeripher_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>
